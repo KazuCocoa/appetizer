@@ -3,34 +3,36 @@
   <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
 </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<div class="container">
+<%= form_for @conn, page_path(@conn, :create), [as: :fields], fn f -> %>
+  <div class="form-group row">
+    <label>
+      issue type: <%= select f, :issue_type, @fields[:issue_type], [class: "form-control"] %>
+    </label>
   </div>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+  <div class="form-group row">
+    <label>
+      Age: <%= select f, :platform, @fields[:platform], [class: "form-control"] %>
+    </label>
   </div>
+
+  <div class="form-group row">
+    <div>
+      <label>title:</label>
+      <%= text_input f, :title, [class: "form-control", required: "required"] %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div>
+      <label>steps:</label>
+      <%= textarea f, :steps, [rows: 5, class: "form-control", required: "required"]%>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= submit "Send", [class: "btn btn-primary"]%>
+  </div>
+<% end %>
 </div>
