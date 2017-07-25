@@ -3,27 +3,42 @@ defmodule Appetizer.Web.PageController do
 
   @issue_type ["Bug", "Feature Resuest"]
   @platform ["Android", "iOS", "Web"]
+  @serverity ["High", "Middle", "Low"]
+  @support_api ["GitHub", "Trello"]
 
   @input_validate_fields ["issue_type", "platform", "title", "steps"]
 
   defstruct [:issue_type, :platform, :title, :steps]
 
   def index(conn, _params) do
-    render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type]
+    render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type, serverity: @serverity, support_api: @support_api]
   end
 
-  def create(conn, %{"fields" => %{"issue_type" => issue_type, "platform" => platform, "title" => title, "steps" => steps}}) do
-    IO.inspect "#{issue_type} / #{platform} / #{title} / #{steps}"
-    render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type, title: title, steps: steps]
+  def create(conn, %{"fields" =>
+    %{
+      "issue_type" => issue_type,
+      "platform" => platform,
+      "title" => title,
+      "steps" => steps,
+      "serverity" => serverity,
+      "platform_version" => platform_version,
+      "expected_behaviour" => expected_behaviour,
+      "support_api" => support_api
+    }}) do
+
+      IO.inspect "#{issue_type} / #{platform} / #{title} / #{steps}"
+      IO.inspect "#{serverity} / #{platform_version} / #{expected_behaviour} / #{support_api}"
+
+      render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type, serverity: @serverity, support_api: @support_api]
   end
   def create(conn, %{"fields" => fields}) do
     case Map.keys(fields) |> validate_fields() do
       :ok ->
-        render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type]
+        render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type, serverity: @serverity, support_api: @support_api]
       {:error, message} ->
         conn
         |> put_flash(:error, message)
-        |> render("index.html", fields: [platform: @platform, issue_type: @issue_type])
+        |> render("index.html", fields: [platform: @platform, issue_type: @issue_type, serverity: @serverity, support_api: @support_api])
     end
   end
 
