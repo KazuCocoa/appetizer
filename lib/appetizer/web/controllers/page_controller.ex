@@ -16,10 +16,8 @@ defmodule Appetizer.Web.PageController do
     IO.inspect "#{issue_type} / #{platform} / #{title} / #{steps}"
     render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type, title: title, steps: steps]
   end
-
-  # only for validations
-  def create(conn, params) do
-    case Map.keys(params["fields"]) |> validate_fields() do
+  def create(conn, %{"fields" => fields}) do
+    case Map.keys(fields) |> validate_fields() do
       :ok ->
         render conn, "index.html", fields: [platform: @platform, issue_type: @issue_type]
       {:error, message} ->
