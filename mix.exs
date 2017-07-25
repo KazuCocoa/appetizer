@@ -23,11 +23,16 @@ defmodule Appetizer.Mixfile do
   defp elixirc_paths(_),     do: ["lib"]
 
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:phoenix, "~> 1.3.0-rc"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"},
+      {:ex_aws, "~> 1.0"},
+      {:hackney, "~> 1.6"},
+      {:uuid, "~> 1.1", runtime: false}
+    ]
   end
 end

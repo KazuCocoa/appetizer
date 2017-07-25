@@ -18,6 +18,9 @@ defmodule Appetizer.Web.Router do
 
     get "/", PageController, :index
     post "/", PageController, :create
+
+    get "/upload", FileUploadController, :upload_form
+    post "/upload", FileUploadController, :upload
   end
 
   # Other scopes may use custom stacks.
